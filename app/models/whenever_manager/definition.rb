@@ -32,6 +32,10 @@ module WheneverManager
         transition :installed => :backup
       end
 
+      event :rollback do
+        transition :backup => :installed
+      end
+
       state :new do
 
       end
@@ -50,7 +54,7 @@ module WheneverManager
         whenever_cmd = Crontab.new(
             :file => definition.schedule.path.to_s,
             :update => true,
-            :identifier => identifier
+            :identifier => definition.identifier
         )
 
         # backup previous
@@ -69,6 +73,9 @@ module WheneverManager
       after_transition :draft => :installed do |definition, transition|
         definition.previous.backup
       end
+      before_transition :archived => :installed do |definition, transition|
+        # TODO rollback
+      end
 
       state :archived do
 
@@ -83,16 +90,14 @@ module WheneverManager
     # get previous entry
     # @return [WheneverManager::Definition]
     def previous
-      @previous ||= Definition.where("created_at < ?", self.created_at).order("created DESC").first
+      @previous ||= Definition.where("created_at < ?", self.created_at).order("created_at DESC").first
     end
 
     # get previous entry
     # @return [WheneverManager::Definition]
     def next
-      @previous ||= Definition.where("created_at > ?", self.created_at).order("created DESC").first
+      @previous ||= Definition.where("created_at > ?", self.created_at).order("created_at DESC").first
     end
-
-    protected
 
     def make_draft
       file_name = Rails.root.join('tmp').join("schedule_tmp_#{DateTime.now.to_i}")
