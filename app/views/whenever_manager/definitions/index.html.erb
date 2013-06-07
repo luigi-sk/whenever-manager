@@ -1,0 +1,37 @@
+<h1>Definitions#index</h1>
+
+<% unless @definitions.any? %>
+    <%= form_for(@definition) do |f| %>
+        <%= f.button("initialize history",type: :submit,:value=>"1", name: :initialize_first) %>
+    <% end %>
+<% end %>
+
+<table>
+<% @definitions.each do |definition| %>
+    <tr>
+      <td><%= definition.created_at %></td>
+      <td>
+        <div class="schedule_code">
+            <pre>
+              <code>
+                <%= definition.content %>
+              </code>
+            </pre>
+        </div>
+
+      </td>
+      <td>
+        <pre>
+            <code class="bash">
+                <%= definition.crontab_content %>
+            </code>
+        </pre>
+      </td>
+      <td><%=  %></td>
+      <td><%=  %></td>
+    </tr>
+<% end %>
+</table>
+
+
+

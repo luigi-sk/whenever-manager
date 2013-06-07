@@ -1,0 +1,15 @@
+<%= form_for(@definition) do |f|  %>
+
+
+    <div class="schedule_code">
+      <pre>
+          <code><%= @definition.content %></code>
+      </pre>
+      <%= f.text_area(:content) %>
+
+    </div>
+
+    <%= f.text_area(:crontab_content) %>
+
+
+<% end %>

@@ -1,0 +1,26 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.schedule_code{
+  position: relative;
+  width: 500px;
+  height: 300px;
+  textarea, pre, code{
+    font-family: monospace;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 14px;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right: 0;
+    padding: 0;
+    margin:0;
+  }
+  textarea{
+    display: none;
+  }
+}

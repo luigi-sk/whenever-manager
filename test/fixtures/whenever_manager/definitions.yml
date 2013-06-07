@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyText
+  crontab_content: MyText
+  version: 1
+  archived_at: 2013-06-07 01:19:13
+
+two:
+  content: MyText
+  crontab_content: MyText
+  version: 1
+  archived_at: 2013-06-07 01:19:13
