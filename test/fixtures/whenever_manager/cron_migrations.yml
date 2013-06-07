@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  definition_id: 
+  crontab_content: MyText
+
+two:
+  definition_id: 
+  crontab_content: MyText

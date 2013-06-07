@@ -46,7 +46,7 @@ GEM
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
-      climate_control (< 1.0, >= 0.0.3)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)

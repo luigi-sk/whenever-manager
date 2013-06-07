@@ -1,13 +1,20 @@
+require 'fileutils'
+require 'tempfile'
 require 'Whenever'
 
 module WheneverManager
   class Crontab < Whenever::CommandLine
-    def list
-      read_crontab
+    attr_accessor :result
+
+    # Do nothing, prevent before exit program
+    def exit(param)
+      @result = param
     end
 
-    def whenever_cron
+    # make public
+    def read_crontab
       super()
     end
+
   end
 end

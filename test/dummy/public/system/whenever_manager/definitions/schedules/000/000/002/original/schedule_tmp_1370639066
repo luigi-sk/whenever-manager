@@ -1,0 +1,183 @@
+# Use this file to easily define all of your cron jobs.
+#
+# It's helpful, but not entirely necessary to understand cron before proceeding.
+# http://en.wikipedia.org/wiki/Cron
+
+# Example:
+#
+# set :output, "/path/to/my/cron_log.log"
+#
+# every 2.hours do
+#   command "/usr/bin/some_great_command"
+#   runner "MyModel.some_method"
+#   rake "some:great:rake:task"
+# end
+#
+# every 4.days do
+#   runner "AnotherModel.prune_old_records"
+# end
+
+# Learn more: http://github.com/javan/whenever
+
+
+## Global
+
+every 1.day, :at => "2:00 pm" do
+  rake "cbc:daily_campaign_stats"
+end
+
+every 1.day, :at => "10:00 pm" do
+  rake "cbc:campaign_daily_emails"
+end
+
+every 1.day, :at => "6:00 am" do
+  rake "cbc_ads:import_all_ads"
+end
+
+every 1.day, :at => "8:00 am" do
+  rake "cbc_ads:send_ads_report"
+end
+
+every 1.hour do
+  command "curl http://127.0.0.1:80/sk/call_center/lists/update_from_remote.json?security_token=btpHykLEQsmGRa4D1ufIeNaT7JBi1O"
+end
+
+# turn off xml exception
+every 1.day, :at => "10:00 am" do
+  rake "cbc_affiliate:reject"
+end
+
+# receiving email and parse
+#every 1.hour do
+#  rake "cbc_email:receive"
+#end
+
+
+
+## SK
+every 1.day, :at => "2:00 am" do
+  rake "cbc:daily_import_states[sk]"
+end
+
+every 1.day, :at => "3:05 am" do
+  rake "cbc:after15days[sk,1]"
+end
+
+every 1.day, :at => "4:00 am" do
+  rake "cbc:send_lmo[sk,1]"
+end
+
+every 1.day, :at => "11:30 pm" do
+  rake "cbc:import_batch[sk,9999]"
+end
+
+every 1.day, :at => "1:00 am" do
+  rake "cbc:sync_members[sk]"
+end
+
+
+## RO
+
+every 1.day, :at => "3:25 am" do
+  rake "cbc:sync_members[ro]"
+end
+
+every 1.day, :at => "2:05 am" do
+  rake "cbc:daily_import_states[ro]"
+end
+
+every 1.day, :at => "3:10 am" do
+  rake "cbc:after15days[ro,1]"
+end
+
+every 1.day, :at => "4:03 am" do
+  rake "cbc:send_lmo[ro,1]"
+end
+
+every 1.day, :at => "11:40 pm" do
+  rake "cbc:import_batch[ro,9999]"
+end
+
+
+## AT
+every 1.day, :at => "2:10 am" do
+  rake "cbc:daily_import_states[at]"
+end
+every 1.day, :at => "11:33 pm" do
+  rake "cbc:import_batch[at,9999]"
+end
+every 1.day, :at => "3:30 am" do
+  rake "cbc:sync_members[at]"
+end
+
+every 1.day, :at => "3:25 am" do
+  rake "cbc:after15days[at]"
+end
+
+# vypnute https://basecamp.com/1892086/projects/690947-cbc-telemarketing/todos/43512070-vypnut-fmo-lmo
+#every 1.day, :at => "4:08 am" do
+#  rake "cbc:send_lmo[at,1]"
+#end
+
+## HU
+every 1.day, :at => "2:00 am" do
+  rake "cbc:daily_import_states[hu]"
+end
+
+every 1.day, :at => "3:35 am" do
+  rake "cbc:sync_members[hu]"
+end
+
+every 1.day, :at => "11:45 pm" do
+  rake "cbc:import_batch[hu,9999]"
+end
+
+every 1.day, :at => "3:20 am" do
+  rake "cbc:after15days[hu]"
+end
+
+every 1.day, :at => "4:04 am" do
+  rake "cbc:send_lmo[hu,1]"
+end
+
+## CZ
+every 1.day, :at => "2:20 am" do
+  rake "cbc:daily_import_states[cz]"
+end
+
+every 1.day, :at => "3:41 am" do
+  rake "cbc:sync_members[cz]"
+end
+
+every 1.day, :at => "11:48 pm" do
+  rake "cbc:import_batch[cz,9999]"
+end
+
+every 1.day, :at => "3:14 am" do
+  rake "cbc:after15days[cz,1]"
+end
+
+every 1.day, :at => "4:07 am" do
+  rake "cbc:send_lmo[cz,1]"
+end
+
+## IT
+every 1.day, :at => "2:00 am" do
+  rake "cbc:daily_import_states[it]"
+end
+
+#every 1.day, :at => "3:35 am" do
+#  rake "cbc:sync_members[it]"
+#end
+
+#every 1.day, :at => "11:45 pm" do
+#  rake "cbc:import_batch[it,9999]"
+#end
+
+#every 1.day, :at => "3:20 am" do
+#  rake "cbc:after15days[it]"
+#end
+#
+#every 1.day, :at => "4:04 am" do
+#  rake "cbc:send_lmo[it,1]"
+#end

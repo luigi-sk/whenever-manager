@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607192743) do
+ActiveRecord::Schema.define(:version => 20130607221647) do
+
+  create_table "whenever_manager_cron_migrations", :force => true do |t|
+    t.integer  "definition_id"
+    t.text     "crontab_content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "whenever_manager_cron_migrations", ["definition_id"], :name => "index_whenever_manager_cron_migrations_on_definition_id"
 
   create_table "whenever_manager_definitions", :force => true do |t|
     t.text     "content"
